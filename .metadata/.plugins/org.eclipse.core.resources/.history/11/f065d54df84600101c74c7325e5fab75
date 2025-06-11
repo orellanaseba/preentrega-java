@@ -1,0 +1,14 @@
+package main;
+
+import preentrega.model.Producto;
+
+public class Main {
+	public static void main(String args[]) {
+		Producto p1 = new Producto("Chocolate", 11.1, 20);
+		Producto p2 = new Producto("Chocolate", 11.1, 20);
+		System.out.println(p1.getNombre());
+		System.out.println(p1.getId());
+		System.out.println(p2.getId());
+		System.out.println(p1.getId());
+	}
+}

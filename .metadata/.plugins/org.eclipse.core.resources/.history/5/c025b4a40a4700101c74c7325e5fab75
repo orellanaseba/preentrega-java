@@ -1,0 +1,168 @@
+package ui;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+import preentrega.model.Pedido;
+import preentrega.model.Producto;
+import services.PedidoService;
+import services.ProductoService;
+
+public class Menu {
+	private Scanner sc = new Scanner(System.in);
+	private ProductoService productoService = new ProductoService();
+	private PedidoService pedidoService = new PedidoService();
+	
+	public void mostrar() {
+		int opcion;
+		
+		do {
+            System.out.println("\n--- MENÚ ---");
+            System.out.println("1. Agregar Producto");
+            System.out.println("2. Listar Productos");
+            System.out.println("3. Buscar/Actualizar Producto");
+            System.out.println("4. Eliminar Producto");
+            System.out.println("5. Crear Pedido");
+            System.out.println("6. Listar Pedidos");
+            System.out.println("7. Salir");
+
+            opcion = sc.nextInt();
+
+            switch (opcion) {
+                case 1:
+                	agregarProducto();
+                	break;
+                case 2:
+                	listarProductos();
+                	break;
+                case 3:
+                	System.out.println("Esta opción no funciona, elige otra.");
+                	break;
+                case 4:
+//                	eliminarProducto();
+                	break;
+                case 5:
+//                	crearPedido();
+                	break;
+                case 6:
+//                	listarPedidos();
+                	break;
+                case 7: 
+                	System.out.println("¡Hasta luego!");
+                	break;
+                default:
+                	System.out.println("Opción inválida.");
+                	break;
+            }
+        } while (opcion != 7);
+    }
+	
+	private void agregarProducto() {
+		System.out.println("Nombre: ");
+		String nombre = sc.next();
+		
+		double precio;
+		while(true) {
+			System.out.println("Precio: ");
+			try {
+				precio = sc.nextDouble();
+				if(precio <= 0) {
+					System.out.println("El precio debe ser mayor a 0.");
+					continue;
+				}
+				break;
+			} catch (Exception e) {
+				System.out.println("Ingrese un número válido.");
+				sc.next();
+			}
+		}
+		
+		int stock;
+		while(true) {
+			System.out.println("Stock: ");
+			try {
+				stock = sc.nextInt();
+				if(stock <= 0) {
+					System.out.println("El stock no puede ser negativo ni cero.");
+					continue;
+				}
+				break;
+			} catch (Exception e) {
+				System.out.println("Ingrese un número entero válido");
+				sc.next();
+			}	
+		}
+		
+		productoService.agregarProducto(new Producto(nombre, precio, stock));
+	}
+	
+	private void agregarPedido() {
+	    Pedido nuevoPedido = new Pedido();
+
+	    while (true) {
+	        listarProductos(); // Mostramos productos disponibles
+	        System.out.println("Ingrese el ID del producto a agregar (0 para terminar): ");
+	        int id = sc.nextInt();
+
+	        if (id == 0) break;
+
+	        Producto producto = productoService.buscarPorId(id);
+	        if (producto != null) {
+	            if (producto.getStock() > 0) {
+	                nuevoPedido.agregarPedido(producto);
+	                producto.setStock(producto.getStock() - 1);
+	                System.out.println("Producto agregado al pedido.");
+	            } else {
+	                System.out.println("Stock insuficiente.");
+	            }
+	        } else {
+	            System.out.println("Producto no encontrado.");
+	        }
+	    }
+
+	    if (!nuevoPedido.listarPedidos().isEmpty()) {
+	        pedidoService.agregarPedido(nuevoPedido);
+	        System.out.println("Pedido creado con ID: " + nuevoPedido.getId());
+	    } else {
+	        System.out.println("No se agregó ningún producto. Pedido cancelado.");
+	    }
+	}
+	
+	private void listarProductos() {
+		ArrayList<Producto> productos = productoService.listarProductos();
+		if(productos.isEmpty()) System.out.println("No hay productos.");
+		else {
+			System.out.println("\n--- LISTA DE PRODUCTOS ---");
+	        for (Producto p : productos) {
+	            System.out.println("ID: " + p.getId() +
+	                               " | Nombre: " + p.getNombre() +
+	                               " | Precio: $" + p.getPrecio() +
+	                               " | Stock: " + p.getStock());
+	        }
+		}
+	}
+	
+	private void listarPedidos() {
+	    ArrayList<Pedido> pedidos = pedidoService.listarPedidos();
+
+	    if (pedidos.isEmpty()) {
+	        System.out.println("No hay pedidos registrados.");
+	    } else {
+	        System.out.println("\n--- LISTA DE PEDIDOS ---");
+	        for (Pedido pedido : pedidos) {
+	            System.out.println("Pedido ID: " + pedido.getId());
+
+	            if (pedido.listarPedidos().isEmpty()) {
+	                System.out.println("  (sin productos)");
+	            } else {
+	                for (Producto p : pedido.listarPedidos()) {
+	                    System.out.println("  - " + p.getNombre() + " | $" + p.getPrecio());
+	                }
+	            }
+
+	            System.out.println("Total: $" + pedido.calcularTotal());
+	            System.out.println("------------------------------");
+	        }
+	    }
+	}
+}

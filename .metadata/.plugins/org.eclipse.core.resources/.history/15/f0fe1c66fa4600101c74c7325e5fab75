@@ -1,0 +1,10 @@
+package preentrega.model;
+
+import java.util.ArrayList;
+import preentrega.model.Producto;
+
+public class Pedido {
+	ArrayList<Producto> carrito = new ArrayList<Producto>();
+	private int id;
+	
+}

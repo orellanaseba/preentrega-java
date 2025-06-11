@@ -1,0 +1,58 @@
+package ui;
+
+import java.util.Scanner;
+
+public class Menu {
+	private Scanner sc = new Scanner(System.in);
+	
+	public void mostrar() {
+		int opcion;
+		
+		do {
+            System.out.println("\n--- MENÚ ---");
+            System.out.println("1. Agregar Producto");
+            System.out.println("2. Listar Productos");
+            System.out.println("3. Buscar/Actualizar Producto");
+            System.out.println("4. Eliminar Producto");
+            System.out.println("5. Crear Pedido");
+            System.out.println("6. Listar Pedidos");
+            System.out.println("7. Salir");
+
+            opcion = sc.nextInt();
+
+            switch (opcion) {
+                case 1:
+                	agregarProducto();
+                	break;
+                case 2:
+                	listarProductos();
+                	break;
+                case 3:
+                	actualizarProducto();
+                	break;
+                case 4:
+                	eliminarProducto();
+                	break;
+                case 5:
+                	crearPedido();
+                	break;
+                case 6:
+                	listarPedidos();
+                	break;
+                case 7: 
+                	System.out.println("¡Hasta luego!");
+                	break;
+                default:
+                	System.out.println("Opción inválida.");
+                	break;
+            }
+        } while (opcion != 7);
+    }
+	
+	private void agregarProducto() {
+		System.out.println("Nombre: ");
+		String nombre = sc.next();
+		System.out.println("Precio: ");
+		double precio = sc.nextDouble();
+	}
+}

@@ -1,0 +1,24 @@
+package preentrega.model;
+
+import java.util.ArrayList;
+import preentrega.model.Producto;
+
+public class Pedido {
+	ArrayList<Producto> carrito = new ArrayList<>();
+	private static int contador = 0;
+	private int id;
+	
+	public Pedido() {
+		this.id = ++contador;
+		this.carrito = new ArrayList<>();
+	}
+	
+	
+	public void agregarPedido(Producto producto) {
+		carrito.add(producto);
+	}
+	
+	public ArrayList<Producto> getProductos() {
+		return carrito;
+	}
+}

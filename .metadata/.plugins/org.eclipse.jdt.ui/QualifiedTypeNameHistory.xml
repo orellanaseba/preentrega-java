@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="java.util.ArrayList"/>
+    <fullyQualifiedTypeName name="preentrega.model.Pedido"/>
+    <fullyQualifiedTypeName name="java.lang.IllegalArgumentException"/>
+    <fullyQualifiedTypeName name="services.ProductoService"/>
+    <fullyQualifiedTypeName name="preentrega.model.Producto"/>
+    <fullyQualifiedTypeName name="ui.Menu"/>
+    <fullyQualifiedTypeName name="java.lang.Error"/>
+    <fullyQualifiedTypeName name="services.PedidoService"/>
+</qualifiedTypeNameHistroy>

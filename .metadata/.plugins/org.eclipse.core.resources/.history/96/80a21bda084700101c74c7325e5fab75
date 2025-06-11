@@ -1,0 +1,25 @@
+package services;
+
+import java.util.ArrayList;
+
+import preentrega.model.Pedido;
+
+public class PedidoService {
+	private ArrayList<Pedido> carrito = new ArrayList<>();
+	
+	public void agregarPedido(Pedido p) {
+		carrito.add(p);
+	}
+	
+	public ArrayList<Pedido> listarPedidos() {
+		return carrito;
+	}
+	
+	public double calcularTotal() {
+        double total = 0;
+        for (Producto p : productos) {
+            total += p.getPrecio();
+        }
+        return total;
+    }
+}

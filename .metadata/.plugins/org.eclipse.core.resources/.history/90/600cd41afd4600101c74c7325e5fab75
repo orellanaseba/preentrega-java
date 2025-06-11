@@ -1,0 +1,9 @@
+package services;
+
+import java.util.ArrayList;
+
+import preentrega.model.Pedido;
+
+public class PedidoService {
+	private ArrayList<Pedido> carrito = new ArrayList<>();
+}

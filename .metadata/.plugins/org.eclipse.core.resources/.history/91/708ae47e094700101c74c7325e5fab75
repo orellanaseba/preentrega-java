@@ -1,0 +1,47 @@
+package preentrega.model;
+
+import java.util.ArrayList;
+import preentrega.model.Producto;
+
+public class Pedido {
+	ArrayList<Producto> carrito;
+	private static int contador = 0;
+	private int id;
+	
+	public Pedido() {
+		this.id = ++contador;
+		this.carrito = new ArrayList<>();
+	}
+	
+	
+	public void agregarPedido(Producto producto) {
+		carrito.add(producto);
+	}
+	
+	public ArrayList<Producto> getProductos() {
+		return carrito;
+	}
+	
+	public double calcularTotal() {
+        double total = 0;
+        for (Producto p : carrito) {
+            total += p.getPrecio();
+        }
+        return total;
+    }
+	
+	@Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder("Pedido ID: " + id + "\n");
+        if (carrito.isEmpty()) {
+            sb.append("  (sin productos)\n");
+        } else {
+            for (Producto p : carrito) {
+                sb.append("  - ").append(p.getNombre())
+                  .append(" | $").append(p.getPrecio()).append("\n");
+            }
+        }
+        sb.append("Total: $").append(calcularTotal());
+        return sb.toString();
+    }
+}

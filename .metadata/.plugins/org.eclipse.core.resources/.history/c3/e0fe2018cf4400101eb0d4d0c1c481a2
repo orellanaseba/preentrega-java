@@ -1,0 +1,6 @@
+package preentrega.model;
+
+public class Producto {
+	private static int id = 1;
+	
+}

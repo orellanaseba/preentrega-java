@@ -1,0 +1,5 @@
+package preentrega.model;
+
+public class Pedido {
+
+}

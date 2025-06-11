@@ -1,0 +1,8 @@
+package preentrega.model;
+
+import java.util.ArrayList;
+
+public class Pedido {
+	private static id = 1;
+	ArrayList<Pedido> pedidos = 
+}
